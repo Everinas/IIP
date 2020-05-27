@@ -78,45 +78,6 @@ public class myDbAdapter {
         }
         return games;
     }
-    public ArrayList getNames()
-    {
-        ArrayList<String> names = new ArrayList<>();
-        SQLiteDatabase db = myhelper.getWritableDatabase();
-        String[] columns = {myDbHelper.UID,myDbHelper.NAME,myDbHelper.Difficulty,myDbHelper.Result};
-        Cursor cursor =db.query(myDbHelper.TABLE_NAME,columns,null,null,null,null,null);
-        while (cursor.moveToNext())
-        {
-            String name =cursor.getString(cursor.getColumnIndex(myDbHelper.NAME));
-            names.add(name);
-        }
-        return names;
-    }
-    public ArrayList getDifficulties()
-    {
-        ArrayList<String> difficulties = new ArrayList<>();
-        SQLiteDatabase db = myhelper.getWritableDatabase();
-        String[] columns = {myDbHelper.UID,myDbHelper.NAME,myDbHelper.Difficulty,myDbHelper.Result};
-        Cursor cursor =db.query(myDbHelper.TABLE_NAME,columns,null,null,null,null,null);
-        while (cursor.moveToNext())
-        {
-            String difficulty =cursor.getString(cursor.getColumnIndex(myDbHelper.Difficulty));
-            difficulties.add(difficulty);
-        }
-        return difficulties;
-    }
-    public ArrayList getResults()
-    {
-        ArrayList<String> results = new ArrayList<>();
-        SQLiteDatabase db = myhelper.getWritableDatabase();
-        String[] columns = {myDbHelper.UID,myDbHelper.NAME,myDbHelper.Difficulty,myDbHelper.Result};
-        Cursor cursor =db.query(myDbHelper.TABLE_NAME,columns,null,null,null,null,null);
-        while (cursor.moveToNext())
-        {
-            String result =cursor.getString(cursor.getColumnIndex(myDbHelper.Result));
-            results.add(result);
-        }
-        return results;
-    }
     public String getData()
     {
         SQLiteDatabase db = myhelper.getWritableDatabase();
@@ -149,16 +110,6 @@ public class myDbAdapter {
 
         int count =db.delete(myDbHelper.TABLE_NAME ,null,null);
         return  count;
-    }
-
-    public int updateName(String oldName , String newName)
-    {
-        SQLiteDatabase db = myhelper.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(myDbHelper.NAME,newName);
-        String[] whereArgs= {oldName};
-        int count =db.update(myDbHelper.TABLE_NAME,contentValues, myDbHelper.NAME+" = ?",whereArgs );
-        return count;
     }
 
     static class myDbHelper extends SQLiteOpenHelper

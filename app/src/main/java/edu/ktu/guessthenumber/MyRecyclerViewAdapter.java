@@ -14,30 +14,25 @@ import java.util.List;
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
     private List<GameClass> mData;
-    private Button deleteBtn;
     private LayoutInflater mInflater;
-    private ItemClickListener mClickListener;
+
 
     // data is passed into the constructor
     MyRecyclerViewAdapter(Context context, List<GameClass> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView name, dif, result;
 
         public ViewHolder(View view) {
             super(view);
-            name = (TextView) view.findViewById(R.id.name_list);
-            dif = (TextView) view.findViewById(R.id.difficulty_list);
-            result = (TextView) view.findViewById(R.id.result_list);
-          //  deleteBtn = (Button) view.findViewById(R.id.delete_btn);
+            name = view.findViewById(R.id.name_list);
+            dif = view.findViewById(R.id.difficulty_list);
+            result = view.findViewById(R.id.result_list);
+
         }
 
-        @Override
-        public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
-        }
     }
 
     // inflates the row layout from xml when needed
@@ -68,20 +63,4 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     }
 
 
-
-
-   /* // convenience method for getting data at click position
-    String getItem(int id) {
-        return mData.get(id);
-    }*/
-
-    // allows clicks events to be caught
-    void setClickListener(ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
-    }
-
-    // parent activity will implement this method to respond to click events
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
-    }
 }
